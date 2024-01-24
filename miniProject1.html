@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Bilangan Prima</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generator Bilangan Prima</h1>
+    <hr>
+
+    <label>Angka Pertama:</label>
+    <input type="number" id="inputAngkaPertama" min="2" required>
+    <br>
+    <label>Angka Terakhir:</label>
+    <input type="number" id="inputAngkaTerakhir" min="3" required>
+    <br>
+    <button onclick="generatePrimes()">Generate Bilangan Prima</button>
+
+    <table id="primeTable">
+        <tr>
+            <th>Bilangan Prima</th>
+        </tr>
+    </table>
+
+    <script>
+        function isPrime(num) {
+            for (let i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return num !== 1;
+        }
+
+        function generatePrimes() {
+            const angkaPertama = parseInt(document.getElementById("inputAngkaPertama").value);
+            const angkaTerakhir = parseInt(document.getElementById("inputAngkaTerakhir").value);
+
+            let primes = [];
+
+
+            for (let i = angkaPertama + 1; i < angkaTerakhir; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+
+            displayPrimes(primes);
+        }
+
+        function displayPrimes(primes) {
+            const primeTable = document.getElementById("primeTable");
+            primeTable.innerHTML = "<tr><th>Bilangan Prima</th></tr>";
+
+            primes.forEach(prime => {
+                const row = primeTable.insertRow();
+                const cell = row.insertCell(0);
+                cell.textContent = prime;
+            });
+        }
+    </script>
+</body>
+
+</html>
